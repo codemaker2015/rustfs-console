@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { api, formatSize } from '../api'
+import { api, formatSize, uid } from '../api'
 import { useApp } from '../context'
 import BucketSelect from './BucketSelect'
 import Icon from './Icon'
@@ -22,7 +22,7 @@ export default function FileUpload() {
   const [running, setRunning] = useState(false)
 
   const add = (fileList) =>
-    setItems((cur) => [...cur, ...Array.from(fileList).map((file) => ({ id: crypto.randomUUID(), file, status: 'pending', error: '' }))])
+    setItems((cur) => [...cur, ...Array.from(fileList).map((file) => ({ id: uid(), file, status: 'pending', error: '' }))])
 
   const patch = (id, change) => setItems((cur) => cur.map((i) => (i.id === id ? { ...i, ...change } : i)))
 

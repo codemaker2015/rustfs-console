@@ -28,6 +28,11 @@ services:
       RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY:-RUSTFSADMIN01}
       RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY:-MyStrongRustFSSecret123!}
       RUSTFS_REGION: ${RUSTFS_REGION:-us-east-1}
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+    volumes:
+      - api_data:/app/data
 
   web:
     build: ./web
@@ -41,3 +46,4 @@ services:
 volumes:
   rustfs_data:
   rustfs_logs:
+  api_data:
