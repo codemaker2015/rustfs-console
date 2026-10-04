@@ -6,6 +6,8 @@ A full-featured, production-ready S3 admin platform for RustFS, with a separate 
 Browser (Vite / Nginx) --> FastAPI --> boto3 --> RustFS S3 API
 ```
 
+![demo](demo/demo.gif)
+
 ## Features
 
 ### Admin portal
