@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: #effaf8;
+  --color-brand-100: #d3f2ec;
+  --color-brand-600: #0f766e;
+  --color-brand-700: #0d5f59;
+}
+body { @apply bg-slate-50 text-slate-800 antialiased; }
+@utility btn { @apply inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 disabled:opacity-50 disabled:pointer-events-none; }
+@utility btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700; }
+@utility btn-ghost { @apply btn text-slate-600 hover:bg-slate-100; }
+@utility btn-danger { @apply btn text-red-600 hover:bg-red-50; }
+@utility input { @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-brand-600 focus:outline-2 focus:outline-brand-600/30; }
+@utility card { @apply rounded-lg border border-slate-200 bg-white; }

@@ -1,0 +1,43 @@
+services:
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: rustfs
+    restart: unless-stopped
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # RustFS console
+    environment:
+      RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY:-RUSTFSADMIN01}
+      RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY:-MyStrongRustFSSecret123!}
+      RUSTFS_ADDRESS: 0.0.0.0:9000
+      RUSTFS_CONSOLE_ADDRESS: 0.0.0.0:9001
+      RUSTFS_CONSOLE_ENABLE: "true"
+    volumes:
+      - rustfs_data:/data
+      - rustfs_logs:/logs
+
+  api:
+    build: ./server
+    container_name: rustfs-api
+    restart: unless-stopped
+    depends_on:
+      - rustfs
+    environment:
+      RUSTFS_ENDPOINT: http://rustfs:9000
+      RUSTFS_PUBLIC_ENDPOINT: ${RUSTFS_PUBLIC_ENDPOINT:-http://localhost:9000}
+      RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY:-RUSTFSADMIN01}
+      RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY:-MyStrongRustFSSecret123!}
+      RUSTFS_REGION: ${RUSTFS_REGION:-us-east-1}
+
+  web:
+    build: ./web
+    container_name: rustfs-web
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  rustfs_data:
+  rustfs_logs:
